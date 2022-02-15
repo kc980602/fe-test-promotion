@@ -1,0 +1,5 @@
+[
+  { "id": 1, "name": "Best Offer", "url": "/promo-detail?from=best_offer" },
+  { "id": 2, "name": "New Arrivial", "url": "/promo-detail?from=new_arrivial" },
+  { "id": 3, "name": "Flash Sale", "url": "/promo-detail?from=flash_sale" }
+]
