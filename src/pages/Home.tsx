@@ -1,7 +1,22 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
+import Container from '~/components/Container'
 import PromoCat from '~/components/PromoCat'
+import { ThemeColorOption } from '~/constants/app'
+import { getCategories } from '~/slices/promotionSlice'
+import { useDispatch, useSelector } from '~/store'
+import { ThemeColor } from '~/types/app.type'
 
 const Home: FC = () => {
+  const dispatch = useDispatch()
+
+  const { categories } = useSelector(state => state.promotion)
+
+  const [themeColor, setThemeColor] = useState<ThemeColor>('orange')
+
+  useEffect(() => {
+    dispatch(getCategories())
+  }, [])
+
   return (
     <div className='Home'>
       <h1>Hello Offers!</h1>
@@ -21,7 +36,24 @@ const Home: FC = () => {
         allowed.
       </p>
       <hr />
-      <PromoCat />
+
+      <div sx={{ backgroundColor: `${themeColor}.light`, height: '100vh', py: 40 }}>
+        <Container>
+          <div sx={{mb: 4}}>
+            <span sx={{mr: 2}}>Theme Color:</span>
+            {
+              ThemeColorOption.map(color => (
+                <button
+                  sx={{ backgroundColor: `${color}.base`, color: 'white' }}
+                  onClick={() => setThemeColor(color)}
+                >{color}</button>
+              ))
+            }
+          </div>
+
+          <PromoCat categories={categories} color={themeColor} />
+        </Container>
+      </div>
     </div>
   )
 }

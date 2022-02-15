@@ -1,22 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import service from '~/service'
-import type { AppThunk } from '~/store'
 import { Category, Promotion } from '~/types/promotion.type'
-
-
-const getCategories = createAsyncThunk(
-  'promotion/getCategories',
-  async () => {
-    return await service.promotion.getCategories()
-  }
-)
-
-const getPromotions = createAsyncThunk<Promotion[], number>(
-  'promotion/getPromotions',
-  async (id) => {
-    return await service.promotion.getPromotions({ id })
-  }
-)
 
 interface PromotionState {
   categories: Category[],
@@ -27,6 +11,22 @@ const initialState: PromotionState = {
   categories: [],
   promotions: []
 }
+
+export const getCategories = createAsyncThunk(
+  'promotion/getCategories',
+  async () => {
+    return await service.promotion.getCategories()
+  }
+)
+
+export const getPromotions = createAsyncThunk<Promotion[], number>(
+  'promotion/getPromotions',
+  async (id, thunkAPI) => {
+    return await service.promotion.getPromotions({ id }, {
+      signal: thunkAPI.signal,
+    })
+  }
+)
 
 const slice = createSlice({
   name: 'promotion',
