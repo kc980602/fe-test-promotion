@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [],
+  "author": "Kevin Cheung",
+  "license": "UNLICENSED",
   "main": "src/index.tsx",
   "dependencies": {
     "@craco/craco": "^6.4.3",
@@ -26,11 +28,22 @@
     "@types/lodash": "^4.14.178",
     "@types/react": "17.0.20",
     "@types/react-dom": "17.0.9",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
+    "jest": "^27.5.1",
+    "redux-mock-store": "^1.5.4",
     "typescript": "4.4.2"
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build"
+    "build": "craco build",
+    "test": "react-scripts test"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^~/(.*)$": "<rootDir>/src/$1"
+    }
   },
   "browserslist": [
     ">0.2%",
