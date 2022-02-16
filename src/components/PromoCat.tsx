@@ -18,6 +18,9 @@ const PromoCat: FC<PromoCatProps> = ({ categories, color = 'orange' }) => {
 
   const { promotions } = useSelector(state => state.promotion)
 
+  const category = _.find(categories, { id: selected })
+
+  //  Set default active tab
   useEffect(() => {
     if (categories && !_.isEmpty(categories)) {
       setSelected(categories[0].id)
@@ -79,6 +82,8 @@ const PromoCat: FC<PromoCatProps> = ({ categories, color = 'orange' }) => {
       </div>
       <div
         sx={{
+          display: 'flex',
+          flexDirection: 'column',
           position: 'relative',
           zIndex: 2,
           borderWidth: 10,
@@ -108,6 +113,22 @@ const PromoCat: FC<PromoCatProps> = ({ categories, color = 'orange' }) => {
             ))
           }
         </div>
+
+        {
+          category &&
+          <a
+            href={category.url}
+            target='_blank'
+            sx={{
+              p: 3,
+              backgroundColor: `${color}.base`,
+              color: 'white',
+              mt: 3,
+              mx: 'auto'
+            }}
+          >See All {category.name}</a>
+        }
+
       </div>
     </div>
   )
