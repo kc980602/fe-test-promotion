@@ -27,7 +27,7 @@ const PromoItem: FC<PromoItemProps> = ({ promotion, color }) => {
   const grid = imgCount > 5 ? 3 : imgCount > 1 ? 2 : 1
 
   return (
-    <Link to={promotion.promoUrl}>
+    <a href={promotion.promoUrl} target="_blank">
       <div
         sx={{
           borderWidth: 2,
@@ -74,7 +74,7 @@ const PromoItem: FC<PromoItemProps> = ({ promotion, color }) => {
         </span>
         </div>
       </div>
-    </Link>
+    </a>
   )
 }
 
